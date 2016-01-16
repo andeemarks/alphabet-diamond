@@ -13,4 +13,14 @@
 (fact (ad/interrow-gap 4) => 5)
 (fact (ad/interrow-gap 5) => 7)
 
-(fact (ad/top-half "A") => nil)
+(fact (ad/line-width "A") => 1)
+(fact (ad/line-width "B") => 3)
+(fact (ad/line-width "C") => 5)
+(fact (ad/line-width "D") => 7)
+
+(fact (ad/row 0 "A") => "A")
+(fact (ad/row -1 "B") => " A ")
+(fact (ad/row 0 "B") => "B B")
+
+(future-fact (ad/top-half "A") => nil)
+(future-fact (ad/top-half "B") => [" A "])

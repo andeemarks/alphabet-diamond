@@ -1,6 +1,9 @@
 (ns alphabet-diamond.core
   	(:gen-class))
 
+(defn row [row-number letter]
+	letter)
+
 (defn top-half [letter]
 	nil)
 	
@@ -13,6 +16,11 @@
 (defmethod interrow-gap 2 [_] 1)
 (defmethod interrow-gap :default [row-number] 
 	(+ 2 (interrow-gap (- row-number 1))))
+
+(defn line-width [letter]
+	(if (= "A" letter)
+		1
+		(+ 2 (interrow-gap (half-height letter)))))
 
 (defn -main
   	"I don't do a whole lot ... yet."
