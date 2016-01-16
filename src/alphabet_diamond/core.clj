@@ -1,9 +1,6 @@
 (ns alphabet-diamond.core
   	(:gen-class))
 
-(defn row [row-number letter]
-	letter)
-
 (defn top-half [letter]
 	nil)
 	
@@ -21,6 +18,11 @@
 	(if (= "A" letter)
 		1
 		(+ 2 (interrow-gap (half-height letter)))))
+
+(defn row [row-number letter]
+	(if (= row-number 1)
+		(format "%s" (clojure.pprint/cl-format nil "~v<~;~a~;~>" (line-width letter) letter))
+		(format (str "%s" (apply str (repeat (interrow-gap row-number) " ")) "%s") letter letter)))
 
 (defn -main
   	"I don't do a whole lot ... yet."

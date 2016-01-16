@@ -18,9 +18,13 @@
 (fact (ad/line-width "C") => 5)
 (fact (ad/line-width "D") => 7)
 
-(fact (ad/row 0 "A") => "A")
-(fact (ad/row -1 "B") => " A ")
-(fact (ad/row 0 "B") => "B B")
+(fact (ad/row 1 "A") => "A")
+
+(fact (ad/row 1 "B") => " A ")
+(fact (ad/row 2 "B") => "B B")
+
+(fact (ad/row 2 "C") => " B B ")
+(fact (ad/row 3 "C") => "C   C")
 
 (future-fact (ad/top-half "A") => nil)
 (future-fact (ad/top-half "B") => [" A "])
