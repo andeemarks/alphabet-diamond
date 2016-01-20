@@ -19,7 +19,7 @@
 
 (defn letters-to [end-letter]
 	(map char (range (int \A) 
-									 (inc (int (letter-str->ucase-letter end-letter))))))
+		 (inc (int (letter-str->ucase-letter end-letter))))))
 
 (defn line-width [letter]
 	(if (= "A" letter)
@@ -33,12 +33,11 @@
 	(apply str 
 		(repeat (letter-gap row-number) " ")))
 
+(def ^:const row-template "ZYXWVUTSRQPONMLKJIHGFEDCBABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
 (defn row [row-number letter]
-	(let [current-letter (nth (letters-to letter) (- row-number 1))
-				line-width (line-width letter)]
-		(if (top-row? row-number)
-			(clojure.pprint/cl-format nil "~v<~;~a~;~>" line-width current-letter)
-			(clojure.pprint/cl-format nil (str "~v<~;~a~;" (gap row-number) "~a~;~>") line-width current-letter current-letter))
+	(let [row-letter (nth (letters-to letter) (- row-number 1))]
+		(clojure.string/replace row-template (re-pattern (str "[^" row-letter "]")) " ")
 	))
 
 (defn -main
