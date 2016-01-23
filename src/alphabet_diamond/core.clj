@@ -25,11 +25,10 @@
 
 (defn diamond [letter]
 	(let [commands (commands-for letter)]
-		(map row commands)
+		(print (map row commands))
 		)
 	)
 
 (defn -main
-  	"I don't do a whole lot ... yet."
   	[& args]
   	(diamond args))
