@@ -10,6 +10,6 @@
 (fact (clojure.string/trim (ad/row 2 "C")) => "B B")
 (fact (clojure.string/trim (ad/row 3 "C")) => "C   C")
 
-(fact (ad/letters-to "C") => [\A \B \C])
-(fact (ad/letters-to "A") => [\A])
-(fact (ad/letters-to "d") => [\A \B \C \D])
+(fact (ad/commands-for "C") => [[1 "A"] [2 "B"] [3 "C"] [2 "B"] [1 "A"]])
+(fact (ad/commands-for "A") => [[1 "A"]])
+(fact (ad/commands-for "d") => [[1 "A"] [2 "B"] [3 "C"] [4 "D"] [3 "C"] [2 "B"] [1 "A"]])

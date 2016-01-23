@@ -1,12 +1,15 @@
 (ns alphabet-diamond.core
   	(:gen-class))
 
-(defn- letter-str->ucase-letter [letter]
-	(.charAt (clojure.string/upper-case letter) 0))
+(defn- ucase-letter [letter]
+	(int (.charAt (clojure.string/upper-case letter) 0)))
 
-(defn letters-to [end-letter]
-	(map char (range (int \A) 
-		 (inc (int (letter-str->ucase-letter end-letter))))))
+(defn- char-range [start end]
+  (map char (range (int start) (inc (int end)))))
+
+(defn commands-for [end-letter]
+	(let [letters (map-indexed (fn [index letter] [(+ 1 index) (str (char letter))]) (char-range \A (ucase-letter end-letter)))]
+				(into (reverse letters) (rest (reverse letters)))))
 
 (def ^:const row-template "ZYXWVUTSRQPONMLKJIHGFEDCBABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
