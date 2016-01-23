@@ -27,6 +27,17 @@
 	(let [commands (commands-for letter)]
 		(map row commands)))
 
+(defn check-spec [spec]
+	{:pre [(not (nil? spec))
+					(= 1 (count (clojure.string/trim spec)))
+				 (re-seq #"[A-Za-z]" (clojure.string/trim spec))]}
+		true)
+
 (defn -main
   	[& args]
-  	(doall (map println (diamond (first args)))))
+  	(let [spec (first args)]
+	  	(try (check-spec spec)
+	  		(doall (map println (diamond spec)))
+	  		(catch AssertionError inputError
+	  			(println "INVALID INPUT"))))
+  		)
