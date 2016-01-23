@@ -14,13 +14,13 @@
 (defn commands-for [end-letter]
 	(let [letters (letter-range \A (ucase-letter end-letter))
 				rows-and-letters (reverse (map-indexed (fn [index letter] (instruction index letter)) letters))]
-				(into rows-and-letters (rest rows-and-letters))))
+			(into rows-and-letters (rest rows-and-letters))))
 
 (defn row [row-instructions]
 	(let [row-number (first row-instructions)
 				letter (second row-instructions)
 				row-letter (nth (letter-range \A (ucase-letter letter)) (- row-number 1))]
-				(clojure.string/replace row-template (re-pattern (str "[^" row-letter "]")) " ")
+			(clojure.string/replace row-template (re-pattern (str "[^" row-letter "]")) " ")
 	))
 
 (defn diamond [letter]
@@ -29,8 +29,7 @@
 
 (defn check-spec [spec]
 	{:pre [(not (nil? spec))
-					(= 1 (count (clojure.string/trim spec)))
-				 (re-seq #"[A-Za-z]" (clojure.string/trim spec))]}
+				 (re-seq #"^[A-Za-z]$" (clojure.string/trim spec))]}
 		true)
 
 (defn -main
@@ -38,6 +37,4 @@
   	(let [spec (first args)]
 	  	(try (check-spec spec)
 	  		(doall (map println (diamond spec)))
-	  		(catch AssertionError inputError
-	  			(println "INVALID INPUT"))))
-  		)
+	  		(catch AssertionError inputError (println "INVALID INPUT")))))
