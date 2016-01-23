@@ -1,9 +1,10 @@
-(ns alphabet-diamond.core)
+(ns alphabet-diamond.core
+	(:require [clojure.string :as str :refer [upper-case trim]]))
 
 (def ^:const row-template "ZYXWVUTSRQPONMLKJIHGFEDCBABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 (defn- ucase-letter [letter]
-	(int (.charAt (clojure.string/upper-case letter) 0)))
+	(int (.charAt (upper-case letter) 0)))
 
 (defn- letter-range [start-letter end-letter]
   (map char (range (int start-letter) (inc (int end-letter)))))
@@ -20,7 +21,7 @@
 	(let [row-number (first row-instructions)
 				letter (second row-instructions)
 				row-letter (nth (letter-range \A (ucase-letter letter)) (- row-number 1))]
-			(clojure.string/replace row-template (re-pattern (str "[^" row-letter "]")) " ")
+			(str/replace row-template (re-pattern (str "[^" row-letter "]")) " ")
 	))
 
 (defn diamond [letter]
@@ -29,7 +30,7 @@
 
 (defn check-spec [spec]
 	{:pre [(not (nil? spec))
-				 (re-seq #"^[A-Za-z]$" (clojure.string/trim spec))]}
+				 (re-seq #"^[A-Za-z]$" (trim spec))]}
 		true)
 
 (defn -main
