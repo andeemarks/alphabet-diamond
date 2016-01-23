@@ -1,5 +1,4 @@
-(ns alphabet-diamond.core
-  	(:gen-class))
+(ns alphabet-diamond.core)
 
 (def ^:const row-template "ZYXWVUTSRQPONMLKJIHGFEDCBABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
@@ -18,7 +17,7 @@
 				(into rows-and-letters (rest rows-and-letters))))
 
 (defn row [row-number letter]
-	(let [row-letter (nth (letters-to letter) (- row-number 1))]
+	(let [row-letter (nth (letter-range \A (ucase-letter letter)) (- row-number 1))]
 				(clojure.string/replace row-template (re-pattern (str "[^" row-letter "]")) " ")
 	))
 
