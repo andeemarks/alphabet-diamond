@@ -25,10 +25,8 @@
 
 (defn diamond [letter]
 	(let [commands (commands-for letter)]
-		(print (map row commands))
-		)
-	)
+		(map row commands)))
 
 (defn -main
   	[& args]
-  	(diamond args))
+  	(doall (map println (diamond (first args)))))
