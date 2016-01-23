@@ -16,8 +16,10 @@
 				rows-and-letters (reverse (map-indexed (fn [index letter] (instruction index letter)) letters))]
 				(into rows-and-letters (rest rows-and-letters))))
 
-(defn row [row-number letter]
-	(let [row-letter (nth (letter-range \A (ucase-letter letter)) (- row-number 1))]
+(defn row [row-instructions]
+	(let [row-number (first row-instructions)
+				letter (second row-instructions)
+				row-letter (nth (letter-range \A (ucase-letter letter)) (- row-number 1))]
 				(clojure.string/replace row-template (re-pattern (str "[^" row-letter "]")) " ")
 	))
 
