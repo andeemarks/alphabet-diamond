@@ -2,13 +2,13 @@
   (:require [alphabet-diamond.core :refer :all])
   (:use [midje.sweet]))
 
-(fact (clojure.string/trim (row {:number 1 :letter "A"})) => "A")
-(fact (clojure.string/trim (row {:number 2 :letter "B"})) => "B B")
-(fact (clojure.string/trim (row {:number 3 :letter "C"})) => "C   C")
+(fact (clojure.string/trim (row "A")) => "A")
+(fact (clojure.string/trim (row "B")) => "B B")
+(fact (clojure.string/trim (row "C")) => "C   C")
 
-(fact (row-instructions-for "C") => [{:number 1 :letter "A"} {:number 2 :letter "B"} {:number 3 :letter "C"} {:number 2 :letter "B"} {:number 1 :letter "A"}])
-(fact (row-instructions-for "A") => [{:number 1 :letter "A"}])
-(fact (row-instructions-for "d") => [{:number 1 :letter "A"} {:number 2 :letter "B"} {:number 3 :letter "C"} {:number 4 :letter "D"} {:number 3 :letter "C"} {:number 2 :letter "B"} {:number 1 :letter "A"}])
+(fact (row-instructions-for "C") => ["A" "B" "C" "B" "A"])
+(fact (row-instructions-for "A") => ["A"])
+(fact (row-instructions-for "d") => ["A" "B" "C" "D" "C" "B" "A"])
 
 (facts "Valid specs are single alphabetic characters"
 	(fact (check-spec "A") => truthy)
@@ -21,3 +21,6 @@
 	(fact (check-spec "4") => (throws AssertionError))
 	(fact (check-spec "(") => (throws AssertionError))
 	(fact (check-spec nil) => (throws AssertionError)))
+
+(facts "Smoke test shows no smoke"
+	(fact (-main "Z") => truthy))
