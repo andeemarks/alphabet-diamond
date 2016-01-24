@@ -27,13 +27,12 @@
 (defn diamond [letter]
 	(map row (row-instructions-for letter)))
 
-(defn check-spec [spec]
-	{:pre [(not (nil? spec))
-				 (re-seq #"^[A-Za-z]$" (trim spec))]}
-		true)
+(defn valid-spec? [spec]
+	(and (not (nil? spec))
+			 (re-seq #"^[A-Za-z]$" (trim spec))))
 
 (defn -main [& args]
   	(let [spec (first args)]
-	  	(try (check-spec spec)
+	  	(if (valid-spec? spec)
 	  		(doall (map println (diamond spec)))
-	  		(catch AssertionError inputError (println "INVALID INPUT")))))
+	  		(println "INVALID INPUT"))))

@@ -11,16 +11,16 @@
 (fact (row-instructions-for "d") => ["A" "B" "C" "D" "C" "B" "A"])
 
 (facts "Valid specs are single alphabetic characters"
-	(fact (check-spec "A") => truthy)
-	(fact (check-spec "c") => truthy)
-	(fact (check-spec "Z") => truthy)
-	(fact (check-spec "  E   ") => truthy)
-	(fact (check-spec "") => (throws AssertionError))
-	(fact (check-spec "AA") => (throws AssertionError))
-	(fact (check-spec " ") => (throws AssertionError))
-	(fact (check-spec "4") => (throws AssertionError))
-	(fact (check-spec "(") => (throws AssertionError))
-	(fact (check-spec nil) => (throws AssertionError)))
+	(fact (valid-spec? "A") => truthy)
+	(fact (valid-spec? "c") => truthy)
+	(fact (valid-spec? "Z") => truthy)
+	(fact (valid-spec? "  E   ") => truthy)
+	(fact (valid-spec? "") => falsey)
+	(fact (valid-spec? "AA") => falsey)
+	(fact (valid-spec? " ") => falsey)
+	(fact (valid-spec? "4") => falsey)
+	(fact (valid-spec? "(") => falsey)
+	(fact (valid-spec? nil) => falsey))
 
 (facts "Smoke test shows no smoke"
 	(fact (-main "Z") => truthy))
