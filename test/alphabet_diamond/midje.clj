@@ -6,9 +6,9 @@
 (fact (clojure.string/trim (row {:number 2 :letter "B"})) => "B B")
 (fact (clojure.string/trim (row {:number 3 :letter "C"})) => "C   C")
 
-(fact (commands-for "C") => [{:number 1 :letter "A"} {:number 2 :letter "B"} {:number 3 :letter "C"} {:number 2 :letter "B"} {:number 1 :letter "A"}])
-(fact (commands-for "A") => [{:number 1 :letter "A"}])
-(fact (commands-for "d") => [{:number 1 :letter "A"} {:number 2 :letter "B"} {:number 3 :letter "C"} {:number 4 :letter "D"} {:number 3 :letter "C"} {:number 2 :letter "B"} {:number 1 :letter "A"}])
+(fact (row-instructions-for "C") => [{:number 1 :letter "A"} {:number 2 :letter "B"} {:number 3 :letter "C"} {:number 2 :letter "B"} {:number 1 :letter "A"}])
+(fact (row-instructions-for "A") => [{:number 1 :letter "A"}])
+(fact (row-instructions-for "d") => [{:number 1 :letter "A"} {:number 2 :letter "B"} {:number 3 :letter "C"} {:number 4 :letter "D"} {:number 3 :letter "C"} {:number 2 :letter "B"} {:number 1 :letter "A"}])
 
 (facts "Valid specs are single alphabetic characters"
 	(fact (check-spec "A") => truthy)

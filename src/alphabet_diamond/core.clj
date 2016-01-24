@@ -12,7 +12,7 @@
 (defn- instruction [index letter]
 	{:number (+ 1 index) :letter (str (char letter))})
 
-(defn commands-for [end-letter]
+(defn row-instructions-for [end-letter]
 	(let [letters (letter-range \A (ucase-letter end-letter))
 				rows-and-letters (reverse (map-indexed (fn [index letter] (instruction index letter)) letters))]
 			(into rows-and-letters (rest rows-and-letters))))
@@ -24,8 +24,8 @@
 	(str/replace row-template (everything-but letter) " "))
 
 (defn diamond [letter]
-	(let [commands (commands-for letter)]
-		(map row commands)))
+	(let [instructions (row-instructions-for letter)]
+		(map row instructions)))
 
 (defn check-spec [spec]
 	{:pre [(not (nil? spec))
