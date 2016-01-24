@@ -10,19 +10,18 @@
   (map char (range (int start-letter) (inc (int end-letter)))))
 
 (defn- instruction [index letter]
-	[(+ 1 index) (str (char letter))])
+	{:number (+ 1 index) :letter (str (char letter))})
 
 (defn commands-for [end-letter]
 	(let [letters (letter-range \A (ucase-letter end-letter))
 				rows-and-letters (reverse (map-indexed (fn [index letter] (instruction index letter)) letters))]
 			(into rows-and-letters (rest rows-and-letters))))
 
-(defn row [row-instructions]
-	(let [row-number (first row-instructions)
-				letter (second row-instructions)
-				row-letter (nth (letter-range \A (ucase-letter letter)) (- row-number 1))]
-			(str/replace row-template (re-pattern (str "[^" row-letter "]")) " ")
-	))
+(defn- everything-but [letter]
+	(re-pattern (str "[^" letter "]")))
+
+(defn row [{row-number :number letter :letter}]
+	(str/replace row-template (everything-but letter) " "))
 
 (defn diamond [letter]
 	(let [commands (commands-for letter)]
