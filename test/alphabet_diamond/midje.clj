@@ -6,9 +6,9 @@
 (fact (clojure.string/trim (row "B")) => "B B")
 (fact (clojure.string/trim (row "C")) => "C   C")
 
-(fact (row-instructions-for "C") => ["A" "B" "C" "B" "A"])
-(fact (row-instructions-for "A") => ["A"])
-(fact (row-instructions-for "d") => ["A" "B" "C" "D" "C" "B" "A"])
+(fact (row-instructions-for "C") => [\A \B \C \B \A])
+(fact (row-instructions-for "A") => [\A])
+(fact (row-instructions-for "d") => [\A \B \C \D \C \B \A])
 
 (facts "Valid specs are single alphabetic characters"
 	(fact (valid-spec? "A") => truthy)
